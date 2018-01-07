@@ -1,0 +1,21 @@
+{
+  "name": "flxxyz/Col",
+  "description": "Col",
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "flxxyz",
+      "email": "i@0bug.work"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "php-curl-class/php-curl-class": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Col\\": "src/",
+      "App\\": "demo/"
+    }
+  }
+}
