@@ -1,7 +1,7 @@
 {
-  "name": "flxxyz/Col",
-  "description": "Col",
-  "license": "GPLv3",
+  "name": "flxxyz/col",
+  "description": "This is a simple PHP framework",
+  "license": "MIT",
   "authors": [
     {
       "name": "flxxyz",

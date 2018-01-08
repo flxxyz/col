@@ -19,13 +19,21 @@ class Response
 
     public function json(array $data)
     {
-        $this->setBody(json_encode($data));
+        $this->setBody(json_encode($data, JSON_UNESCAPED_UNICODE));
         $this->setHeader('Content-Type', 'application/json');
 
         return $this;
     }
 
-    public function text(string $data)
+    public function xml($data)
+    {
+        $this->setBody(Util::xml_encode($data));
+        $this->setHeader('Content-Type', 'application/xml');
+
+        return $this;
+    }
+
+    public function text($data)
     {
         $this->setBody($data);
 

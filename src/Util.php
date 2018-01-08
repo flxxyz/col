@@ -7,29 +7,74 @@ use Curl\Curl;
 class Util
 {
     /**
-     * 构造通用json返回
+     * 构造通用json
      * @param $data
      * @return string
      */
-    static function json($data)
+    static function json($data): string
     {
-        return json_encode($data);
+        return self::response()->json($data);
     }
 
-    static function config($filename, $key = null)
+    /**
+     * @return object
+     */
+    static function response(): object
+    {
+        return new Response;
+    }
+
+    /**
+     * 构造xml
+     * @param $data
+     * @return string
+     */
+    static function xml_encode(array $data): string
+    {
+        $xml = "<response>";
+        foreach ($data as $key => $val) {
+            if (is_array($val)) {
+                $xml .= "<" . $key . ">" . self::xml_encode($val) . "</" . $key . ">";
+            } else {
+                $xml .= "<" . $key . ">" . $val . "</" . $key . ">";
+            }
+        }
+        $xml .= "</response>";
+        return $xml;
+    }
+
+    /**
+     * 解构xml
+     * @param string $data
+     * @return array
+     */
+    static function xml_decode(string $data)
+    {
+        $xml = simplexml_load_string($data);
+        return json_decode(json_encode($xml), true);
+    }
+
+    /**
+     * 获取配置项
+     * @param string $filename
+     * @param null $key
+     * @return mixed|null
+     */
+    static function config(string $filename, $key = null)
     {
         if (is_null($key)) {
-            return require APP_DIR . "/config/{$filename}.php";
+            return require BASE_DIR . "/config/{$filename}.php";
         }
 
-        $data = require APP_DIR . "/config/{$filename}.php";
+        $data = require BASE_DIR . "/config/{$filename}.php";
 
         foreach ($data as $k => $v) {
-            if($key !== $k) continue;
+            if ($key !== $k) continue;
 
             return $data[$k];
         }
 
+        return null;
     }
 
     /**
@@ -57,7 +102,7 @@ class Util
      * @param null $time
      * @return array
      */
-    static function diffDays($time = null)
+    static function diffDays($time = null): array
     {
         $time = $time ?? time();
         $day_seconds = 60 * 60 * 24 - 1;  // 考虑在当天内，减去一秒钟
@@ -82,12 +127,12 @@ class Util
      * @param null $uri
      * @param array $data
      * @param null $referer
-     * @return Curl|__anonymous@1717
+     * @return object
      */
-    static function getHttp($uri = null, $data = [], $referer = null)
+    static function getHttp($uri = null, $data = [], $referer = null): object
     {
         if (is_null($uri)) {
-            return new Class
+            return new class
             {
             };
         }
@@ -104,12 +149,12 @@ class Util
      * @param null $uri
      * @param array $data
      * @param null $referer
-     * @return Curl|__anonymous@2194
+     * @return object
      */
-    static function postHttp($uri = null, $data = [], $referer = null)
+    static function postHttp($uri = null, $data = [], $referer = null): object
     {
         if (is_null($uri)) {
-            return new Class
+            return new class
             {
             };
         }

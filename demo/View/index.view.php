@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>about</title>
+    <title><?=$title?></title>
 </head>
 <body>
 <h1><?=$name?></h1>
