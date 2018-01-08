@@ -1,11 +1,16 @@
 {
   "name": "flxxyz/col",
+  "keywords": ["framework", "php", "simple"],
   "description": "This is a simple PHP framework",
+  "homepage": "http://github.com/flxxyz/Col",
+  "version": "0.0.1",
+  "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "flxxyz",
-      "email": "i@0bug.work"
+      "email": "i@0bug.work",
+      "homepage": "https://toyou.ren"
     }
   ],
   "require": {
@@ -14,7 +19,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Col\\": "src/",
+      "Col\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "App\\": "demo/"
     }
   }
