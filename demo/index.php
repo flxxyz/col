@@ -8,10 +8,3 @@ define('APP_DIR', realpath(__DIR__) . DS, true);
 define('BASE_DIR', realpath(APP_DIR . '..') . DS, true);
 
 include_once 'bootstrap.php';
-function t()
-{
-    list($ms, $time) = explode(' ', microtime());
-    return $time + $ms;
-}
-
-

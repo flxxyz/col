@@ -24,22 +24,53 @@ function data()
     ];
 }
 
-$route->get('/', function () {
-    view('index', data());
+function t()
+{
+    list($ms, $time) = explode(' ', microtime());
+    return $time + $ms;
+}
+
+/**
+ *  分组示例
+ */
+$route->group('/', function () {
+    /**
+     * 视图示例
+     */
+    $this->get('/', function () {
+        view('index', data());
+    });
+
+    /**
+     * 调用控制器示例
+     */
+    $this->get('/name', [App\Controller\IndexController::class, 'index']);
 });
 
+/**
+ * json返回示例
+ */
 $route->get('/json', function () {
     echo json(data());
 });
 
+/**
+ * xml返回示例
+ */
 $route->get('/xml', function () {
     echo xml(data());
 });
 
+/**
+ * 404示例
+ */
 $route->get('/404', function () {
     view('__404', data(), 404);  // 主动调用404视图
 });
 
+/**
+ * 普通示例
+ */
 $route->get('/sort', function () {
     $start = t();
     echo '<pre>';
