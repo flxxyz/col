@@ -6,54 +6,99 @@ use ArrayAccess;
 
 class Container implements ArrayAccess
 {
-    protected $items = [];
-    protected $cache = [];
+    private $items = [];
+    private $cache = [];
 
+    /**
+     * Container constructor.
+     * @param array $items
+     */
     public function __construct(array $items = [])
     {
-        foreach ($items as $key => $item) {
-            $this->offsetSet($key, $item);
+        foreach ($items as $k => $v) {
+            $this->offsetSet($k, $v);
         }
     }
 
-    public function offsetSet($offset, $value)
+    /**
+     * @param $offset
+     * @return bool
+     */
+    public function cacheExists($offset)
     {
-        $this->items[$offset] = $value;
+        return isset($this->cache[$offset]);
     }
 
-    public function offsetGet($offset)
-    {
-        if (!$this->has($offset)) {
-            return null;
-        }
-        if (isset($this->cache[$offset])) {
-            return $this->cache[$offset];
-        }
-        $item = call_user_func($this->items[$offset], $this); // similar to: $item = $this->items[$offset]($this);
-        $this->cache[$offset] = $item;
-
-        return $item;
-    }
-
-    public function offsetUnset($offset)
-    {
-        if ($this->has($offset)) {
-            unset($this->items[$offset]);
-        }
-    }
-
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return isset($this->items[$offset]);
     }
 
-    public function has($offset)
+    /**
+     * @param $offset
+     * @param $var
+     * @return bool
+     */
+    public function has($offset, string $var = 'items')
     {
-        return $this->offsetExists($offset);
+        switch ($var) {
+            case 'items':
+                return $this->offsetExists($offset);
+                break;
+            case 'cache':
+                return $this->cacheExists($offset);
+                break;
+            default:
+                return null;
+        }
     }
 
-    public function __get($property)
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value)
     {
-        return $this->offsetGet($property);
+        $this->items[$offset] = $value;
     }
+
+    /**
+     * @param mixed $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        if (!$this->has($offset))
+            return null;
+        if ($this->has($offset, 'cache'))
+            return $this->cache[$offset];
+
+        $item = call_user_func($this->items[$offset], $this);
+        $this->cache[$offset] = $item;
+
+        return $this->items[$offset];
+    }
+
+    /**
+     * @param mixed $offset
+     */
+    public function offsetUnset($offset)
+    {
+        if ($this->has($offset))
+            unset($this->items[$offset]);
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->offsetGet($name);
+    }
+
 }

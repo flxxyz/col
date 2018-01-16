@@ -2,100 +2,49 @@
 
 namespace Col;
 
-/**
- * 载入公用函数
- */
-require_once __DIR__ . '/Common/function.php';
-
-use Col\Exceptions\InvalidRouteArgumentException;
+include_once 'Common/function.php';
 
 class Core
 {
+    private static $instance;
     public $container;
 
     public function __construct()
     {
-        $this->container = new Container([
-            'router' => function () {
-                return new Route;
-            },
-            'response' => function () {
-                return new Response;
-            },
-        ]);
+        $this->autoload();
     }
 
-    /**
-     * @return Container
-     */
-    public function getContainer(): Container
+    public static function instance()
     {
-        return $this->container;
-    }
-
-    /**
-     * @param Container $container
-     */
-    public function setContainer(Container $container): void
-    {
-        $this->container = $container;
-    }
-
-    public function get($uri, $handler)
-    {
-        $this->container->router->addRoute($uri, $handler, 'GET');
-    }
-
-    public function post($uri, $handler)
-    {
-        $this->container->router->addRoute($uri, $handler, 'POST');
-    }
-
-    public function run()
-    {
-        $router = $this->container->router;
-        $router->setPath($_SERVER['PATH_INFO'] ?? '/');
-        $router->setAction($_SERVER['REQUEST_METHOD'] ?? '');
-        $handler = $router->getHandler();
-        $response = $this->route($handler);
-        echo $this->respond($response);
-    }
-
-    public function route($handler)
-    {
-        if (is_array($handler)) {
-            $class = "\\App\\Controller\\{$handler[0]}";
-            $handler[0] = new $class($this);
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
         }
-        if (!is_callable($handler)) {
-            throw new InvalidRouteArgumentException;
-        }
-        return call_user_func($handler, $this);
+        return static::$instance;
     }
 
-    public function respond($response)
+    public function autoload()
     {
-        if (is_null($response)) {
-            $response = $this->container->response->text('');
-        } else if (!$response instanceof Response) {
-            $response = $this->container->response->text($response);
-        }
+        spl_autoload_register(function ($className) {
+            $namespace = strtolower(str_replace("\\", DS, __NAMESPACE__));
+            $className = str_replace("\\", DS, $className);
+            $classNameOnly = basename($className);
+            $className = strtolower(substr($className, 0, -strlen($classNameOnly))) . lcfirst($classNameOnly);
 
-        return $response->getBody();
+            if (is_file($class = BASE_PATH . (empty($namespace) ? "" : $namespace . "/") . "{$className}.php")) {
+                return include_once "{$class}";
+            } elseif (is_file($class = BASE_PATH . "{$className}.php")) {
+                return include_once "{$class}";
+            }
+        });
     }
 
-    public function bind($key, Callable $callable)
+    public function __call($method, $args)
     {
-        $this->container[$key] = $callable;
+        return isset($this->{$method}) && is_callable($this->{$method}) ? call_user_func_array($this->{$method}, $args) : null;
     }
 
-    public function response()
+    public function __set($k, $v)
     {
-        return $this->container->response;
-    }
-
-    public function __get($property)
-    {
-        return $this->container[$property];
+        $this->{$k} = $v instanceof Closure ? $v->bindTo($this) : $v;
     }
 }
