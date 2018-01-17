@@ -4,6 +4,7 @@ namespace Col\Common;
 
 use Col\Response;
 use Curl\Curl;
+use Col\Exceptions\FileNotFoundException;
 
 /**
  * Class Util
@@ -51,6 +52,10 @@ class Util
      */
     static function config(string $filename, $key = null)
     {
+        if (!is_file(BASE_DIR . "config/{$filename}.php")) {
+            return [];
+        }
+
         if (is_null($key)) {
             return require BASE_DIR . "config/{$filename}.php";
         }
@@ -64,7 +69,7 @@ class Util
             return $data[$k];
         }
 
-        return null;
+        return [];
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
 use Col\{
-    Request, Response, Route,
+    Request, Response, Route
 };
 use Col\Common\{
-    Util,
+    Util
 };
 
 if (!function_exists('response')) {
@@ -187,5 +187,20 @@ if (!function_exists('http_post')) {
     function http_post($uri = null, $data = [], $referer = null)
     {
         return Util::postHttp($uri, $data, $referer);
+    }
+}
+
+if (!function_exists('_e')) {
+    function _e($var = '')
+    {
+        if (is_object($var) || is_array($var)) {
+            //            echo '<pre>';
+            var_dump($var);
+            //            echo '</pre>';
+        } elseif (is_null($var)) {
+            var_dump(null);
+        } else {
+            echo $var;
+        }
     }
 }
