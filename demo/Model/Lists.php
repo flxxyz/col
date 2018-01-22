@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Col\Model;
 
-class List extends Model
+class Lists extends Model
 {
-
+    public $table = 'lists';
 }

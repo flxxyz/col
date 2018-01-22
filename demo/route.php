@@ -45,6 +45,8 @@ $route->group('/', function () {
      * 调用控制器示例
      */
     $this->get('/name', [App\Controller\IndexController::class, 'index']);
+
+    $this->get('/demo', [App\Controller\IndexController::class, 'demo']);
 });
 
 /**

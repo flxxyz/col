@@ -34,6 +34,7 @@ require_once '../vendor/autoload.php';
 $core = Col\Core::instance();
 $core->request = Col\Request::instance();
 $core->route = Col\Route::instance($core->request);
+$core->session = Col\Session::make();
 $route = $core->route;
 
 require_once APP_DIR . 'route.php';

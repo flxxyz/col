@@ -3,7 +3,7 @@
   "keywords": ["framework", "php", "simple"],
   "description": "This is a simple PHP framework",
   "homepage": "http://github.com/flxxyz/Col",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "library",
   "license": "MIT",
   "authors": [

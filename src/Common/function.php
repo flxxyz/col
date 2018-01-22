@@ -1,7 +1,14 @@
 <?php
+/**
+ * Function function
+ * @package     Col
+ * @author      Allisea.Feng <https://blog.flxxxyz.com/>
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
+ * @version     0.0.4
+ */
 
 use Col\{
-    Request, Response, Route
+    Session
 };
 use Col\Common\{
     Util
@@ -202,5 +209,55 @@ if (!function_exists('_e')) {
         } else {
             echo $var;
         }
+    }
+}
+
+if (!function_exists('url')) {
+    /**
+     * 返回指定的本站url
+     * @param string $path
+     * @return string
+     */
+    function url($path = '')
+    {
+        $config = config('config');
+        $url = $config['url'] . $path;
+        return $url;
+    }
+}
+
+if (!function_exists('redirect')) {
+    /**
+     * 重定向url
+     * @param string $url
+     */
+    function redirect($url = '')
+    {
+        header("Location: {$url}");
+    }
+}
+
+if (!function_exists('convert')) {
+    /**
+     * 压缩数值位数
+     * @param string $hash
+     * @return string
+     */
+    function convert(string $hash)
+    {
+        $bit = base_convert(base_convert($hash, 32, 2) . mt_rand(100, 9999) . time(), 10, 2);
+        $bit = base_convert($bit, 2, 36);
+        return $bit;
+    }
+}
+
+if (!function_exists('session')) {
+    /**
+     * session操作
+     * @return Session
+     */
+    function session()
+    {
+        return new Session;
     }
 }

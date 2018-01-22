@@ -7,12 +7,15 @@ use PDOException;
 
 class Connection
 {
-    public function make($container)
+    public function make($config)
     {
-        $config = $container['config']['database'];
+        $driver = $config['defalut'];
+        $config = $config[$driver];
 
         try {
-            return new PDO($config['driver'] . 'host=' . $config['host'] . ';dbname=' . $config['database'], $config['username'], $config['password'], $config['options']);
+            $dsn = "%s:host=%s;port=%s;dbname=%s;charset=%s;";
+            $dsn = sprintf($dsn, $driver, $config['host'], $config['port'], $config['database'], $config['charset']);
+            return new PDO($dsn, $config['username'], $config['password'], $config['options']);
         }catch(PDOException $e) {
             $error = "database link fail, ";
             $error .= "<strong>{$e->getMessage()}</strong>";
