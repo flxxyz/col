@@ -23,7 +23,7 @@ class QueryBuilder
 
     private $perfix;  // 表前缀
 
-    public function __construct(PDO $connection)
+    public function __construct()
     {
         $config = config('database');
         $this->driver = $config['defalut'];

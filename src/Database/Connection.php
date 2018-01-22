@@ -7,7 +7,7 @@ use PDOException;
 
 class Connection
 {
-    public function make($config)
+    public static function make($config)
     {
         $driver = $config['defalut'];
         $config = $config[$driver];
