@@ -3,7 +3,7 @@
   "keywords": ["framework", "php", "simple", "notorm", "简单框架"],
   "description": "This is a simple PHP framework",
   "homepage": "http://github.com/flxxyz/Col",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -16,7 +16,7 @@
   "require": {
     "php": ">=7.0",
     "php-curl-class/php-curl-class": "^8.0",
-    "vrana/notorm": "dev-master@dev"
+    "vrana/notorm": "dev-master"
   },
   "autoload": {
     "psr-4": {

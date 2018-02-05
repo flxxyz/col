@@ -12,9 +12,13 @@ class IndexController extends Controller
     public function db()
     {
         $start = get_microtime();
-        $rows = DB('goods')->where('id > ?', '0');
+        $good = DB('goods');
+        $rows = $good->where('id > ?', '0');
+        $good = get_array($rows);
         $end = get_microtime();
         echo round(($end-$start) * 1000, 2).'ms';
+        echo '<pre>';
+        print_r($good);
     }
 
     public function demo()

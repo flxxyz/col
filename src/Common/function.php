@@ -4,7 +4,7 @@
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.6
+ * @version     0.0.7
  */
 
 use Col\{
@@ -275,12 +275,24 @@ if (!function_exists('session')) {
 if (!function_exists('DB')) {
     /**
      * @param string $tablename
-     * @param string $perfix
      * @return NotORM
      */
-    function DB($tablename = '', $perfix = '')
+    function DB($tablename = '')
     {
         $model = new Model;
-        return $model->setTable($tablename)->setPerfix($perfix)->handle();
+        return $model->setTable($tablename)->handle();
+    }
+}
+
+if (!function_exists('get_array')) {
+    /**
+     * 感谢stackoverflow答主 Kamil
+     * @link https://stackoverflow.com/questions/12092281/notorm-how-to-fetch-data
+     * @param $obj
+     * @return array
+     */
+    function get_array($obj)
+    {
+        return array_map('iterator_to_array', iterator_to_array($obj));
     }
 }

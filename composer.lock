@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0898b5b255a2f839dbcb6d242c0f4620",
+    "content-hash": "8344d54966e6eff8a9177bcdda4cdec8",
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
@@ -16,7 +16,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-curl-class/php-curl-class/bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd.zip",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd",
                 "reference": "bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd",
                 "shasum": ""
             },
@@ -73,7 +73,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/vrana/notorm/e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd.zip",
+                "url": "https://api.github.com/repos/vrana/notorm/zipball/e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
                 "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
                 "shasum": ""
             },
@@ -83,14 +83,13 @@
                     "NotORM.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0",
                 "GPL-2.0+"
             ],
             "authors": [
                 {
-                    "name": "Jakub Vrana",
+                    "name": "Jakub Vrána",
                     "homepage": "http://www.vrana.cz/"
                 }
             ],
@@ -100,6 +99,10 @@
                 "database",
                 "dbal"
             ],
+            "support": {
+                "source": "https://github.com/vrana/notorm/tree/master",
+                "issues": "https://github.com/vrana/notorm/issues"
+            },
             "time": "2014-10-30T16:55:08+00:00"
         }
     ],

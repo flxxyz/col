@@ -5,7 +5,9 @@ This is a simple PHP framework
 - - - -
 
 ### start
+开始使用请执行下面两条语句
 ```bash
+composer require vrana/notorm:dev-master
 composer require flxxyz/col
 ```
 
