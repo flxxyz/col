@@ -4,15 +4,13 @@
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.4
+ * @version     0.0.6
  */
 
 use Col\{
-    Session
+    Session, Model
 };
-use Col\Common\{
-    Util
-};
+use Col\Common\Util;
 
 if (!function_exists('response')) {
     function response()
@@ -169,6 +167,18 @@ if (!function_exists('get_day_all')) {
     }
 }
 
+if (!function_exists('get_microtime')) {
+    /**
+     * 返回毫秒级时间戳
+     * @return float
+     */
+    function get_microtime(): float
+    {
+        list($time, $ms) = explode(' ', microtime());
+        return $time + $ms;
+    }
+}
+
 if (!function_exists('http_get')) {
     /**
      * 发送http get请求
@@ -259,5 +269,18 @@ if (!function_exists('session')) {
     function session()
     {
         return new Session;
+    }
+}
+
+if (!function_exists('DB')) {
+    /**
+     * @param string $tablename
+     * @param string $perfix
+     * @return NotORM
+     */
+    function DB($tablename = '', $perfix = '')
+    {
+        $model = new Model;
+        return $model->setTable($tablename)->setPerfix($perfix)->handle();
     }
 }

@@ -7,15 +7,19 @@ namespace Col;
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.4
+ * @version     0.0.6
  */
-
 class Session
 {
     private $session;
 
+    private $config;
+
+    private $id;
+
     public function __construct()
     {
+        $this->config = config('config');
         $this->dump();
     }
 
@@ -37,6 +41,7 @@ class Session
             $_SESSION = $this->session;
         } else {
             $this->session = $_SESSION;
+            $this->id = session_id();
         }
     }
 

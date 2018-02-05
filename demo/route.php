@@ -24,12 +24,6 @@ function data()
     ];
 }
 
-function t()
-{
-    list($ms, $time) = explode(' ', microtime());
-    return $time + $ms;
-}
-
 /**
  *  分组示例
  */
@@ -48,6 +42,11 @@ $route->group('/', function () {
 
     $this->get('/demo', [App\Controller\IndexController::class, 'demo']);
 });
+
+/**
+ * 数据库操作示例
+ */
+$route->get('/db', [App\Controller\IndexController::class, 'db']);
 
 /**
  * json返回示例

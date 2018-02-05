@@ -2,11 +2,19 @@
 
 namespace App\Controller;
 
-class IndexController
+class IndexController extends Controller
 {
     public function index()
     {
         echo 'success';
+    }
+
+    public function db()
+    {
+        $start = get_microtime();
+        $rows = DB('goods')->where('id > ?', '0');
+        $end = get_microtime();
+        echo round(($end-$start) * 1000, 2).'ms';
     }
 
     public function demo()

@@ -9,9 +9,8 @@ include_once 'Common/function.php';
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.4
+ * @version     0.0.6
  */
-
 class Core
 {
     private static $instance;
@@ -38,9 +37,9 @@ class Core
             $classNameOnly = basename($className);
             $className = strtolower(substr($className, 0, -strlen($classNameOnly))) . lcfirst($classNameOnly);
 
-            if (is_file($class = BASE_PATH . (empty($namespace) ? "" : $namespace . "/") . "{$className}.php")) {
+            if (is_file($class = BASE_DIR . (empty($namespace) ? "" : $namespace . "/") . "{$className}.php")) {
                 return include_once "{$class}";
-            } elseif (is_file($class = BASE_PATH . "{$className}.php")) {
+            } elseif (is_file($class = BASE_DIR . "{$className}.php")) {
                 return include_once "{$class}";
             }
         });
