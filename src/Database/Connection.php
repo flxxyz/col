@@ -12,7 +12,7 @@ use NotORM_Structure_Convention;
  * @package     Col\Database
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.7
+ * @version     0.0.8
  */
 class Connection
 {
@@ -27,9 +27,9 @@ class Connection
             $pdo = new PDO($dsn, $config['username'], $config['password'], $config['options']);
             $pdo->exec("set names {$config['charset']}");
             $structure = new NotORM_Structure_Convention(
-                '',
-                '',
-                '',
+                'id',
+                '%s_id',
+                '%s',
                 $config['perfix']);
             return new Notorm($pdo, $structure);
         }catch(PDOException $e) {

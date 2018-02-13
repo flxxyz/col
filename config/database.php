@@ -3,11 +3,11 @@
 return [
     'defalut' => 'mysql',
     'mysql'   => [
-        'host'     => '119.28.14.116',
+        'host'     => '127.0.0.1',
         'port'     => 3306,
-        'database' => 'csk',
-        'username' => 'csk',
-        'password' => 'zWLnnrEN76',
+        'database' => 'test',
+        'username' => 'test_user',
+        'password' => 'test_pass',
         'charset'  => 'utf8mb4',
         'perfix'   => 'down_',
         'options'  => [
