@@ -296,3 +296,52 @@ if (!function_exists('get_array')) {
         return array_map('iterator_to_array', iterator_to_array($obj));
     }
 }
+
+if (!function_exists('format_date')) {
+    /**
+     * 感谢sf.gg的萧逸先生
+     * @link https://segmentfault.com/a/1190000008483869
+     * @param $time
+     * @return string
+     */
+    function format_date($time)
+    {
+        $t = time() - $time;
+        $f = array(
+            '31536000' => '年',
+            '2592000'  => '个月',
+            '604800'   => '星期',
+            '86400'    => '天',
+            '3600'     => '小时',
+            '60'       => '分钟',
+            '1'        => '秒',
+        );
+
+        foreach ($f as $k => $v) {
+            if (0 != $c = floor($t / intval($k))) {
+                return $c . $v . '前';
+            }
+        }
+    }
+}
+
+if (!function_exists('floor_tree')) {
+    /**
+     * 层级评论树
+     * @link https://stackoverflow.com/questions/4196157/create-array-tree-from-array-list
+     * @param $list
+     * @param $parent
+     * @return array
+     */
+    function createTree(&$list, $parent)
+    {
+        $tree = [];
+        foreach ($parent as $k => $l) {
+            if (isset($list[$l['id']])) {
+                $l['children'] = createTree($list, $list[$l['id']]);
+            }
+            $tree[] = $l;
+        }
+        return $tree;
+    }
+}
