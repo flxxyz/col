@@ -10,7 +10,7 @@ use Curl\Curl;
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.9
+ * @version     0.1.0
  */
 class Util
 {
@@ -200,7 +200,7 @@ class Util
      * @param null  $referer
      * @return object
      */
-    static function getHttp($uri = null, $data = [], $referer = null): object
+    static function getHttp($uri = null, $data = [], $referer = null)
     {
         if (is_null($uri)) {
             return new Closure;
@@ -221,7 +221,7 @@ class Util
      * @param null  $referer
      * @return object
      */
-    static function postHttp($uri = null, $data = [], $referer = null): object
+    static function postHttp($uri = null, $data = [], $referer = null)
     {
         if (is_null($uri)) {
             return new Closure;

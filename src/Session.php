@@ -7,7 +7,7 @@ namespace Col;
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.6
+ * @version     0.1.0
  */
 class Session
 {
@@ -26,6 +26,10 @@ class Session
     public static function make()
     {
         $config = config('session');
+        $open = isset($config['open']) ? $config['open']:false;
+        if(!$open) {
+            return new \stdClass();
+        }
         session_cache_expire($config['expire']);
         session_cache_limiter($config['limiter']);
         session_name($config['perfix']);

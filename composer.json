@@ -3,7 +3,7 @@
   "keywords": ["framework", "php", "simple", "notorm", "简单框架"],
   "description": "This is a simple PHP framework",
   "homepage": "http://github.com/flxxyz/Col",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "type": "library",
   "license": "MIT",
   "authors": [

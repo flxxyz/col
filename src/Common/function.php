@@ -4,7 +4,7 @@
  * @package     Col
  * @author      Allisea.Feng <https://blog.flxxxyz.com/>
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
- * @version     0.0.7
+ * @version     0.1.0
  */
 
 use Col\{
@@ -320,6 +320,35 @@ if (!function_exists('format_date')) {
         foreach ($f as $k => $v) {
             if (0 != $c = floor($t / intval($k))) {
                 return $c . $v . '前';
+            }
+        }
+    }
+}
+
+if (!function_exists('hex_conver')) {
+    /**
+     * 格式化文件大小输出符合的单位
+     * @param int $bit
+     * @return string
+     */
+    function hex_conver($bit = 0)
+    {
+        if($bit == 0) {
+            return '0B';
+        }
+
+        $bytes = [
+            'TB' => pow(1024, 4),
+            'GB' => pow(1024, 3),
+            'MB' => pow(1024, 2),
+            'KB' => 1024,
+            'B'  => 1,
+        ];
+
+        foreach ($bytes as $name => $value) {
+            $n = intval($bit) / $value;
+            if (0 != $c = floor($n)) {
+                return round($n, 2) . $name;
             }
         }
     }
