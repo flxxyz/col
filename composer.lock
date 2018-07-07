@@ -4,27 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8344d54966e6eff8a9177bcdda4cdec8",
+    "content-hash": "376cbc026ebca9a081fc6dd159025cbc",
     "packages": [
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "8.0.1",
+            "version": "8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd"
+                "reference": "0090c30b4348028cabf1d03427423460ca7dc4a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd",
-                "reference": "bdfe1fcca0c32562050c84e01e3a4cbdc31e22fd",
+                "url": "https://files.phpcomposer.com/files/php-curl-class/php-curl-class/0090c30b4348028cabf1d03427423460ca7dc4a4.zip",
+                "reference": "0090c30b4348028cabf1d03427423460ca7dc4a4",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
+                "ext-mbstring": "*",
                 "php": ">=5.3"
             },
             "require-dev": {
+                "ext-gd": "*",
                 "phpunit/phpunit": "*",
                 "squizlabs/php_codesniffer": "*"
             },
@@ -61,7 +63,7 @@
                 "web service",
                 "xml"
             ],
-            "time": "2018-01-27T15:40:39+00:00"
+            "time": "2018-06-06T05:01:44+00:00"
         },
         {
             "name": "vrana/notorm",

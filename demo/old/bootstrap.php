@@ -37,6 +37,6 @@ $core->route = Col\Route::instance($core->request);
 $core->session = Col\Session::make();
 $route = $core->route;
 
-require_once APP_DIR . 'route.php';
+require_once APP_DIR.'route.php';
 
 $route->end();
